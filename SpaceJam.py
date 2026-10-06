@@ -60,60 +60,56 @@ class MyApp(ShowBase):
         self.taskMgr.add(self.updateCamera, "updateCamera")
 
 
-        self.Universe = self.loader.loadModel("./Assets/Universe/Universe.x")
+        # self.Universe = self.loader.loadModel("./Assets/Universe/Universe.x")
 
-        self.Universe.reparentTo(self.render)
+        # self.Universe.reparentTo(self.render)
 
-        self.Universe.setScale(15000)
+        # self.Universe.setScale(15000)
 
-        Planet2_texture = self.loader.loadTexture("./Assets/Planets/images.jpeg")
-        self.Planet2 = self.loader.loadModel("models/misc/sphere")
-        self.Planet2.reparentTo(self.render)
-        self.Planet2.setTexture(Planet2_texture, 1)
-        self.Planet2.setPos(150, 2500, 67)
-        self.Planet2.setScale(150)
+        #texture = self.loader.loadTexture("./Assets/Universe/images.jpeg")
 
 
+        # self.Universe.setTexture(texture,1)
+        
 
-        # Load a planet image as a texture
-        Planet1_texture = self.loader.loadTexture("./Assets/Planets/images.jpeg")
-        self.Planet1 = self.loader.loadModel("models/misc/sphere")
-        self.Planet1.reparentTo(self.render)
-        # Apply the JPEG texture to the sphere
-        self.Planet1.setTexture(Planet1_texture, 1)
-        self.Planet1.setPos(150, 3000, 67)
-        self.Planet1.setScale(150)
+        # Load planets
+        for i in range(1, 7):
 
-        Planet3_texture = self.loader.loadTexture("./Assets/Planets/images.jpeg")
-        self.Planet3 = self.loader.loadModel("models/misc/sphere")
-        self.Planet3.reparentTo(self.render)
-        self.Planet3.setTexture(Planet3_texture, 1)
-        self.Planet3.setPos(150, 3500, 67)
-        self.Planet3.setScale(150)
 
-        Planet4_texture = self.loader.loadTexture("./Assets/Planets/images.jpeg")
-        self.Planet4 = self.loader.loadModel("models/misc/sphere")
-        self.Planet4.reparentTo(self.render)
-        self.Planet4.setTexture(Planet4_texture, 1)
-        self.Planet4.setPos(150, 4000, 67)
-        self.Planet4.setScale(150)
+            texturePath = f"./Assets/Planets/images-{i}.jpeg"
 
-        Planet5_texture = self.loader.loadTexture("./Assets/Planets/images.jpeg")
-        self.Planet5 = self.loader.loadModel("models/misc/sphere")
-        self.Planet5.reparentTo(self.render)
-        self.Planet5.setTexture(Planet5_texture, 1)
-        self.Planet5.setPos(150, 4500, 67)
-        self.Planet5.setScale(150)
+            # Load texture
+            texture = self.loader.loadTexture(texturePath)
 
-        Planet6_texture = self.loader.loadTexture("./Assets/Planets/images.jpeg")
-        self.Planet6 = self.loader.loadModel("models/misc/sphere")
-        self.Planet6.reparentTo(self.render)
-        self.Planet6.setTexture(Planet6_texture, 1)
-        self.Planet6.setPos(150, 5000, 67)
-        self.Planet6.setScale(150)
+            if texture is None:
+                print(f"COULD NOT LOAD PLANET {i} TEXTURE!")
+                continue
 
-        tex = self.loader.loadTexture("./Assets/Universe/images-1.jpeg")
-        self.Universe.setTexture(tex, 1)
+            print(f"Planet {i} texture loaded!")
+
+            # Load sphere
+            planet = self.loader.loadModel("models/misc/sphere")
+
+            # Put planet into the scene
+            planet.reparentTo(self.render)
+
+            # Apply texture
+            planet.setTexture(texture, 1)
+
+            # Turn off lighting
+            planet.setLightOff()
+
+            # Position planet
+            planet.setPos(150, 2500 + (i - 1) * 500, 67)
+
+            # Size planet
+            planet.setScale(150)
+
+
+
+
+
+
 
 
 
