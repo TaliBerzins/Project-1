@@ -2,6 +2,7 @@ from direct.showbase.ShowBase import ShowBase
 import math, sys, random
 from panda3d.core import Vec3
 
+
 class MyApp(ShowBase):
     def __init__(self):
         ShowBase.__init__(self)
@@ -66,10 +67,15 @@ class MyApp(ShowBase):
 
         # self.Universe.setScale(15000)
 
-        #texture = self.loader.loadTexture("./Assets/Universe/images.jpeg")
+        # texture = self.loader.loadTexture("./Assets/Universe/images.jpeg")
 
 
         # self.Universe.setTexture(texture,1)
+
+
+
+
+        self.planets = []
         
 
         # Load planets
@@ -88,7 +94,8 @@ class MyApp(ShowBase):
             print(f"Planet {i} texture loaded!")
 
             # Load sphere
-            planet = self.loader.loadModel("models/misc/sphere")
+            planet =  self.loader.loadModel("./Assets/Planets/protoPlanet.x")
+
 
             # Put planet into the scene
             planet.reparentTo(self.render)
@@ -98,12 +105,15 @@ class MyApp(ShowBase):
 
             # Turn off lighting
             planet.setLightOff()
+            planet.setShaderOff()
 
             # Position planet
             planet.setPos(150, 2500 + (i - 1) * 500, 67)
 
             # Size planet
             planet.setScale(150)
+
+            self.planets.append(planet)
 
 
 
