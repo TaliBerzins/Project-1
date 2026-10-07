@@ -9,6 +9,16 @@ class MyApp(ShowBase):
 
         self.disableMouse()
 
+        self.fighter = self.loader.loadModel('./Assets/Player/sphere')
+        self.fighter.reparentTo(self.render)
+        self.fighter.setColorScale(1.0,0.0,0.0,1.0)
+        self.fighter.setScale(200)
+        self.fighter.setPos(500,500,500)
+
+
+
+        self.accept('escape', self.quit)
+
         # Camera movement
         self.moveSpeed = 500
         self.mouseSensitivity = 100
@@ -61,17 +71,18 @@ class MyApp(ShowBase):
         self.taskMgr.add(self.updateCamera, "updateCamera")
 
 
-        # self.Universe = self.loader.loadModel("./Assets/Universe/Universe.x")
+        self.Universe = self.loader.loadModel("./Assets/Universe/Universe.x")
+        self.Universe.reparentTo(self.render)
+        self.Universe.setScale(15000)
+        texture = self.loader.loadTexture("./Assets/Universe/images.jpeg")
+        self.Universe.setTexture(texture,1)
 
-        # self.Universe.reparentTo(self.render)
-
-        # self.Universe.setScale(15000)
-
-        # texture = self.loader.loadTexture("./Assets/Universe/images.jpeg")
-
-
-        # self.Universe.setTexture(texture,1)
-
+        self.SpaceStation = self.loader.loadModel("./Assets/Space Station/spaceStation.x")
+        self.SpaceStation.reparentTo(self.render)
+        self.SpaceStation.setScale(150)
+        texture = self.loader.loadTexture("./Assets/Space Station/SpaceStation1_Dif2.png")
+        self.SpaceStation.setTexture(texture,1)
+        self.SpaceStation.setPos(1000, 1500, 100)
 
 
 
@@ -205,6 +216,9 @@ class MyApp(ShowBase):
             )
 
         return task.cont
+
+    def quit(self):
+        sys.exit()
     
     
 
