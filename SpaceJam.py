@@ -1,6 +1,8 @@
 from direct.showbase.ShowBase import ShowBase
 import math, sys, random
 from panda3d.core import Vec3
+import DefensePaths as defensePaths
+import SpaceJamClasses as spaceJamClasses
 
 
 class MyApp(ShowBase):
@@ -85,8 +87,44 @@ class MyApp(ShowBase):
         self.SpaceStation.setPos(1000, 1500, 100)
 
 
+        self.Universe = spaceJamClasses.Universe(self.loader, "./Assets/Universe/Universe.x", self.render, "Universe", "./Assets/Universe/images-jpeg", (0, 0, 0), 10000)
+        self.Planet1 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet1", "./Assets/Planets/images-1.jpeg", (-6000, -3000, -800), 250)
+        self.Planet2 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet2", "./Assets/Planets/images-2.jpeg", (-6000, -3000, -800), 250)
+        self.Planet3 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet3", "./Assets/Planets/images-3.jpeg", (-6000, -3000, -800), 250)
+        self.Planet4 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet4", "./Assets/Planets/images-4jpeg", (-6000, -3000, -800), 250)
+        self.Planet5 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet5", "./Assets/Planets/images-5jpeg", (-6000, -3000, -800), 250)
+        self.Planet6 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet6", "./Assets/Planets/images-6jpeg", (-6000, -3000, -800), 250)
+
+
+        self.Hero = spaceJamClasses.Spaceship(self.loader, "./Assets/Dumbledore/Dubmledore.egg", self.render, "Hero", "./Assets/Dumbledore//spacejet_c.png", Vec3(1000, 1200, -50), 50)
+
+
+
 
         self.planets = []
+
+
+        def DrawBaseballSeams(self, centralObject, droneName, step, numSeams, radius = 1):
+            unitVec = defensePaths.BaseballSeams(step, numSeams, B= 0.4)
+            unitVec.normalize()
+            position = unitVec * radius * 250 + centralObject.modelNode.getPos()
+            spaceJamClasses.Drone(self.loader, "./Assets/DroneDefender/DroneDefender.obj", self.render, droneName, "./Assets/DroneDefender/octotoad1_auv.png", position ,5)
+
+        def DrawCloudDefense(self, centralObject, droneName):
+            unitVec = defensePaths.Cloud()
+            unitVec.normalize()
+            position = unitVec * 500 + centralObject.modelNode.getPos()
+            spaceJamClasses.Drone.
+
+
+        fullCycle = 60
+
+        for j in range(fullCycle):
+            spaceJamClasses.Drone.droneCount += 1
+            nickName = "Drone" + str(spaceJamClasses.Drone.droneCount)
+
+            self.DrawCloudDefense(self.Planet1, nickName)
+            self.DrawBaseballSeams(self.SpaceStation1, nickName, j, fullCycle, 2)
         
 
         # Load planets
