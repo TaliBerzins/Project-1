@@ -87,16 +87,18 @@ class MyApp(ShowBase):
         self.SpaceStation.setPos(1000, 1500, 100)
 
 
-        self.Universe = spaceJamClasses.Universe(self.loader, "./Assets/Universe/Universe.x", self.render, "Universe", "./Assets/Universe/images-jpeg", (0, 0, 0), 10000)
+        self.Universe = spaceJamClasses.Planet(self.loader, "./Assets/Universe/Universe.x", self.render, "Universe", "./Assets/Universe/images.jpeg", (0, 0, 0), 10000)
         self.Planet1 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet1", "./Assets/Planets/images-1.jpeg", (-6000, -3000, -800), 250)
-        self.Planet2 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet2", "./Assets/Planets/images-2.jpeg", (-6000, -3000, -800), 250)
-        self.Planet3 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet3", "./Assets/Planets/images-3.jpeg", (-6000, -3000, -800), 250)
-        self.Planet4 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet4", "./Assets/Planets/images-4jpeg", (-6000, -3000, -800), 250)
-        self.Planet5 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet5", "./Assets/Planets/images-5jpeg", (-6000, -3000, -800), 250)
-        self.Planet6 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet6", "./Assets/Planets/images-6jpeg", (-6000, -3000, -800), 250)
+        self.Planet2 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet2", "./Assets/Planets/images-2.jpeg", (0, 6000, 0), 300)
+        self.Planet3 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet3", "./Assets/Planets/images-3.jpeg", (500, -5000, 200), 500)
+        self.Planet4 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet4", "./Assets/Planets/images-4.jpeg", (300, 6000, 500), 150)
+        self.Planet5 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet5", "./Assets/Planets/images-5.jpeg", (700, -2000, 100), 500)
+        self.Planet6 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet6", "./Assets/Planets/images-6.jpeg", (0, -9000, -1400), 700)
+
+        self.SpaceStation1 = spaceJamClasses.Planet(self.loader, "./Assets/Space Station/spaceStation.x", self.render, 'Space Station', "./Assets/Space Station/SpaceStation1_Dif2.png", (1500, 1000, -100), 40)
 
 
-        self.Hero = spaceJamClasses.Spaceship(self.loader, "./Assets/Dumbledore/Dubmledore.egg", self.render, "Hero", "./Assets/Dumbledore//spacejet_c.png", Vec3(1000, 1200, -50), 50)
+        self.Hero = spaceJamClasses.Planet(self.loader, "./Assets/Spaceships/Dumbledore.egg", self.render, "Hero", "./Assets/Spaceships/spacejet_N.png", Vec3(1000, 1200, -50), 50)
 
 
 
@@ -108,13 +110,13 @@ class MyApp(ShowBase):
             unitVec = defensePaths.BaseballSeams(step, numSeams, B= 0.4)
             unitVec.normalize()
             position = unitVec * radius * 250 + centralObject.modelNode.getPos()
-            spaceJamClasses.Drone(self.loader, "./Assets/DroneDefender/DroneDefender.obj", self.render, droneName, "./Assets/DroneDefender/octotoad1_auv.png", position ,5)
+            spaceJamClasses.Planet(self.loader, "./Assets/Drone Defender/DroneDefender.x", self.render, droneName, "./Assets/Drone Defender/octotoad1_auv.png", position ,5)
 
         def DrawCloudDefense(self, centralObject, droneName):
             unitVec = defensePaths.Cloud()
             unitVec.normalize()
             position = unitVec * 500 + centralObject.modelNode.getPos()
-            spaceJamClasses.Drone.
+            spaceJamClasses.Planet(self.loader, "./Assets/Drone Defender/DroneDefender.x", self.render, droneName, "./Assets/Drone Defender/octotoad1_auv.png", position, 5)
 
 
         fullCycle = 60
@@ -123,46 +125,46 @@ class MyApp(ShowBase):
             spaceJamClasses.Drone.droneCount += 1
             nickName = "Drone" + str(spaceJamClasses.Drone.droneCount)
 
-            self.DrawCloudDefense(self.Planet1, nickName)
-            self.DrawBaseballSeams(self.SpaceStation1, nickName, j, fullCycle, 2)
+            DrawCloudDefense(self, self.Planet1, nickName)
+            DrawBaseballSeams(self, self.SpaceStation1, nickName, j, fullCycle, 2)
         
 
-        # Load planets
-        for i in range(1, 7):
+        # # Load planets
+        # for i in range(1, 7):
 
 
-            texturePath = f"./Assets/Planets/images-{i}.jpeg"
+        #     texturePath = f"./Assets/Planets/images-{i}.jpeg"
 
-            # Load texture
-            texture = self.loader.loadTexture(texturePath)
+        #     # Load texture
+        #     texture = self.loader.loadTexture(texturePath)
 
-            if texture is None:
-                print(f"COULD NOT LOAD PLANET {i} TEXTURE!")
-                continue
+        #     if texture is None:
+        #         print(f"COULD NOT LOAD PLANET {i} TEXTURE!")
+        #         continue
 
-            print(f"Planet {i} texture loaded!")
+        #     print(f"Planet {i} texture loaded!")
 
-            # Load sphere
-            planet =  self.loader.loadModel("./Assets/Planets/protoPlanet.x")
+        #     # Load sphere
+        #     planet =  self.loader.loadModel("./Assets/Planets/protoPlanet.x")
 
 
-            # Put planet into the scene
-            planet.reparentTo(self.render)
+        #     # Put planet into the scene
+        #     planet.reparentTo(self.render)
 
-            # Apply texture
-            planet.setTexture(texture, 1)
+        #     # Apply texture
+        #     planet.setTexture(texture, 1)
 
-            # Turn off lighting
-            planet.setLightOff()
-            planet.setShaderOff()
+        #     # Turn off lighting
+        #     planet.setLightOff()
+        #     planet.setShaderOff()
 
-            # Position planet
-            planet.setPos(150, 2500 + (i - 1) * 500, 67)
+        #     # Position planet
+        #     planet.setPos(150, 2500 + (i - 1) * 500, 67)
 
-            # Size planet
-            planet.setScale(150)
+        #     # Size planet
+        #     planet.setScale(150)
 
-            self.planets.append(planet)
+        #     self.planets.append(planet)
 
 
 

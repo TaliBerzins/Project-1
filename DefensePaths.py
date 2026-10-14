@@ -16,7 +16,7 @@ def Cloud(radius =1):
 
 
 def BaseballSeams(steps, numSeams, B, F= 1):
-    time = step / float(numSeams) * 2 * math.pi
+    time = steps / float(numSeams) * 2 * math.pi
 
     F4 = 0
 
