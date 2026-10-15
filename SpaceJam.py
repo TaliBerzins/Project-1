@@ -72,14 +72,11 @@ class MyApp(ShowBase):
 
 
 
-        self.fighter = self.loader.loadModel('./Assets/Player/sphere')
-        self.fighter.reparentTo(self.render)
-        self.fighter.setColorScale(1.0,0.0,0.0,1.0)
-        self.fighter.setScale(200)
-        self.fighter.setPos(500,5000,500)
+        self.Player = spaceJamClasses.Player(self.loader, "./Assets/Player/sphere.egg", self.render, "Player", (0, 0, 0), 100)
 
 
-        self.Universe = spaceJamClasses.Planet(self.loader, "./Assets/Universe/Universe.x", self.render, "Universe", "./Assets/Universe/images.jpeg", (0, 0, 0), 10000)
+
+        self.Universe = spaceJamClasses.Universe(self.loader, "./Assets/Universe/Universe.x", self.render, "Universe", "./Assets/Universe/images.jpeg", (0, 0, 0), 10000)
         self.Planet1 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet1", "./Assets/Planets/images-1.jpeg", (-6000, -3000, -800), 250)
         self.Planet2 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet2", "./Assets/Planets/images-2.jpeg", (0, 6000, 0), 300)
         self.Planet3 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet3", "./Assets/Planets/images-3.jpeg", (500, -5000, 200), 500)
@@ -87,7 +84,7 @@ class MyApp(ShowBase):
         self.Planet5 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet5", "./Assets/Planets/images-5.jpeg", (700, -2000, 100), 500)
         self.Planet6 = spaceJamClasses.Planet(self.loader, "./Assets/Planets/protoPlanet.x", self.render, "Planet6", "./Assets/Planets/images-6.jpeg", (0, -9000, -1400), 700)
 
-        self.SpaceStation1 = spaceJamClasses.Planet(self.loader, "./Assets/Space Station/spaceStation.x", self.render, 'Space Station', "./Assets/Space Station/SpaceStation1_Dif2.png", (1500, 1000, -100), 40)
+        self.SpaceStation1 = spaceJamClasses.SpaceStation(self.loader, "./Assets/Space Station/spaceStation.x", self.render, 'Space Station', "./Assets/Space Station/SpaceStation1_Dif2.png", (1500, 1000, -100), 40)
 
 
         self.Hero = spaceJamClasses.Planet(self.loader, "./Assets/Spaceships/Dumbledore.egg", self.render, "Hero", "./Assets/Spaceships/spacejet_N.png", Vec3(1000, 1200, -50), 50)
@@ -102,34 +99,34 @@ class MyApp(ShowBase):
             unitVec = defensePaths.BaseballSeams(step, numSeams, B= 0.4)
             unitVec.normalize()
             position = unitVec * radius * 250 + centralObject.modelNode.getPos()
-            spaceJamClasses.Planet(self.loader, "./Assets/Drone Defender/DroneDefender.x", self.render, droneName, "./Assets/Drone Defender/octotoad1_auv.png", position ,5)
+            spaceJamClasses.Drone(self.loader, "./Assets/Drone Defender/DroneDefender.x", self.render, droneName, "./Assets/Drone Defender/octotoad1_auv.png", position ,5)
 
         def DrawCloudDefense(self, centralObject, droneName):
             unitVec = defensePaths.Cloud()
             unitVec.normalize()
             position = unitVec * 500 + centralObject.modelNode.getPos()
-            spaceJamClasses.Planet(self.loader, "./Assets/Drone Defender/DroneDefender.x", self.render, droneName, "./Assets/Drone Defender/octotoad1_auv.png", position, 5)
+            spaceJamClasses.Drone(self.loader, "./Assets/Drone Defender/DroneDefender.x", self.render, droneName, "./Assets/Drone Defender/octotoad1_auv.png", position, 5)
 
 
         def DrawCircleX(self, centralObject, droneName, theta):
             unitVec = defensePaths.circleX(theta)
             unitVec.normalize()
             position = unitVec * 600 + centralObject.modelNode.getPos()
-            spaceJamClasses.Planet(self.loader, "./Assets/Drone Defender/DroneDefender.x", self.render, droneName, "./Assets/Drone Defender/octotoad1_auv.png", position, 5)
+            spaceJamClasses.Drone(self.loader, "./Assets/Drone Defender/DroneDefender.x", self.render, droneName, "./Assets/Drone Defender/octotoad1_auv.png", position, 5)
 
 
         def DrawCircleY(self, centralObject, droneName, theta):
             unitVec = defensePaths.circleY(theta)
             unitVec.normalize()
             position = unitVec * 1000 + centralObject.modelNode.getPos()
-            spaceJamClasses.Planet(self.loader, "./Assets/Drone Defender/DroneDefender.x", self.render, droneName, "./Assets/Drone Defender/octotoad1_auv.png", position, 5)
+            spaceJamClasses.Drone(self.loader, "./Assets/Drone Defender/DroneDefender.x", self.render, droneName, "./Assets/Drone Defender/octotoad1_auv.png", position, 5)
 
 
         def DrawCircleZ(self, centralObject, droneName, theta):
             unitVec = defensePaths.circleZ(theta)
             unitVec.normalize()
             position = unitVec * 300  + centralObject.modelNode.getPos()
-            spaceJamClasses.Planet(self.loader, "./Assets/Drone Defender/DroneDefender.x", self.render, droneName, "./Assets/Drone Defender/octotoad1_auv.png", position, 5)
+            spaceJamClasses.Drone(self.loader, "./Assets/Drone Defender/DroneDefender.x", self.render, droneName, "./Assets/Drone Defender/octotoad1_auv.png", position, 5)
 
 
         fullCycle = 60
