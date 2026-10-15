@@ -11,11 +11,7 @@ class MyApp(ShowBase):
 
         self.disableMouse()
 
-        self.fighter = self.loader.loadModel('./Assets/Player/sphere')
-        self.fighter.reparentTo(self.render)
-        self.fighter.setColorScale(1.0,0.0,0.0,1.0)
-        self.fighter.setScale(200)
-        self.fighter.setPos(500,500,500)
+
 
 
 
@@ -73,18 +69,14 @@ class MyApp(ShowBase):
         self.taskMgr.add(self.updateCamera, "updateCamera")
 
 
-        self.Universe = self.loader.loadModel("./Assets/Universe/Universe.x")
-        self.Universe.reparentTo(self.render)
-        self.Universe.setScale(15000)
-        texture = self.loader.loadTexture("./Assets/Universe/images.jpeg")
-        self.Universe.setTexture(texture,1)
 
-        self.SpaceStation = self.loader.loadModel("./Assets/Space Station/spaceStation.x")
-        self.SpaceStation.reparentTo(self.render)
-        self.SpaceStation.setScale(150)
-        texture = self.loader.loadTexture("./Assets/Space Station/SpaceStation1_Dif2.png")
-        self.SpaceStation.setTexture(texture,1)
-        self.SpaceStation.setPos(1000, 1500, 100)
+
+
+        self.fighter = self.loader.loadModel('./Assets/Player/sphere')
+        self.fighter.reparentTo(self.render)
+        self.fighter.setColorScale(1.0,0.0,0.0,1.0)
+        self.fighter.setScale(200)
+        self.fighter.setPos(500,5000,500)
 
 
         self.Universe = spaceJamClasses.Planet(self.loader, "./Assets/Universe/Universe.x", self.render, "Universe", "./Assets/Universe/images.jpeg", (0, 0, 0), 10000)
@@ -119,56 +111,41 @@ class MyApp(ShowBase):
             spaceJamClasses.Planet(self.loader, "./Assets/Drone Defender/DroneDefender.x", self.render, droneName, "./Assets/Drone Defender/octotoad1_auv.png", position, 5)
 
 
+        def DrawCircleX(self, centralObject, droneName, theta):
+            unitVec = defensePaths.circleX(theta)
+            unitVec.normalize()
+            position = unitVec * 600 + centralObject.modelNode.getPos()
+            spaceJamClasses.Planet(self.loader, "./Assets/Drone Defender/DroneDefender.x", self.render, droneName, "./Assets/Drone Defender/octotoad1_auv.png", position, 5)
+
+
+        def DrawCircleY(self, centralObject, droneName, theta):
+            unitVec = defensePaths.circleY(theta)
+            unitVec.normalize()
+            position = unitVec * 1000 + centralObject.modelNode.getPos()
+            spaceJamClasses.Planet(self.loader, "./Assets/Drone Defender/DroneDefender.x", self.render, droneName, "./Assets/Drone Defender/octotoad1_auv.png", position, 5)
+
+
+        def DrawCircleZ(self, centralObject, droneName, theta):
+            unitVec = defensePaths.circleZ(theta)
+            unitVec.normalize()
+            position = unitVec * 300  + centralObject.modelNode.getPos()
+            spaceJamClasses.Planet(self.loader, "./Assets/Drone Defender/DroneDefender.x", self.render, droneName, "./Assets/Drone Defender/octotoad1_auv.png", position, 5)
+
+
         fullCycle = 60
 
         for j in range(fullCycle):
+            theta = j*6
             spaceJamClasses.Drone.droneCount += 1
             nickName = "Drone" + str(spaceJamClasses.Drone.droneCount)
 
             DrawCloudDefense(self, self.Planet1, nickName)
             DrawBaseballSeams(self, self.SpaceStation1, nickName, j, fullCycle, 2)
+            DrawCircleX(self, self.Planet2, nickName, theta )
+            DrawCircleY(self, self.Planet3, nickName, theta )
+            DrawCircleZ(self, self.Planet4, nickName, theta)
+
         
-
-        # # Load planets
-        # for i in range(1, 7):
-
-
-        #     texturePath = f"./Assets/Planets/images-{i}.jpeg"
-
-        #     # Load texture
-        #     texture = self.loader.loadTexture(texturePath)
-
-        #     if texture is None:
-        #         print(f"COULD NOT LOAD PLANET {i} TEXTURE!")
-        #         continue
-
-        #     print(f"Planet {i} texture loaded!")
-
-        #     # Load sphere
-        #     planet =  self.loader.loadModel("./Assets/Planets/protoPlanet.x")
-
-
-        #     # Put planet into the scene
-        #     planet.reparentTo(self.render)
-
-        #     # Apply texture
-        #     planet.setTexture(texture, 1)
-
-        #     # Turn off lighting
-        #     planet.setLightOff()
-        #     planet.setShaderOff()
-
-        #     # Position planet
-        #     planet.setPos(150, 2500 + (i - 1) * 500, 67)
-
-        #     # Size planet
-        #     planet.setScale(150)
-
-        #     self.planets.append(planet)
-
-
-
-
 
 
 
